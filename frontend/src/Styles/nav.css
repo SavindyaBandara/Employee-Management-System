@@ -1,0 +1,45 @@
+
+
+/* Basic styling for the home container */
+.nav{
+    display: flex;
+    justify-content: center;
+    background-color: #3742a7; /* Background color of the nav bar */
+    padding: 10px ; 
+    margin: 20px;/* Vertical padding for the nav bar */
+    border-radius: 10px;
+  }
+  
+  /* Styling for the unordered list to display items horizontally */
+  .nav-ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0; /* Remove default margin */
+    display: flex; /* Display list items in a row */
+  }
+  
+  /* Styling for each list item */
+  .nav-li {
+    margin: 0 15px; /* Horizontal spacing between items */
+  }
+  
+  /* Styling for the paragraph inside list items */
+  .nav-li p {
+    margin: 0; /* Remove default margin */
+    color: #fff; /* Text color */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: color 0.3s ease; /* Smooth color transition */
+  }
+  
+  /* Add hover effect to list items */
+  .nav-li p:hover {
+    color: #f0f0f0; /* Color change on hover */
+  }
+  
+  /* Optional: Add active or selected state */
+  .nav-li.active p {
+    font-weight: bold; /* Bold text for the active item */
+    color: #f0f0f0; /* Active text color */
+  }
+  
