@@ -1,4 +1,4 @@
-//password = D3gXYY9rAt3ynyfD
+
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -17,7 +17,7 @@ app.use("/departments",deprouter);
 
 
 
-mongoose.connect("mongodb+srv://admin:D3gXYY9rAt3ynyfD@cluster0.iyih7.mongodb.net/")
+mongoose.connect("mongodb link and password")
 .then(()=>console.log("MongoDB connected Succesfully"))
 .then(()=> {
     app.listen(5000);
