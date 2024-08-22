@@ -6,8 +6,8 @@ function Nav() {
     <div className="nav">
         <ul className="nav-ul">
         <li className="nav-li">
-                <Link to = "/home">
-                <p>Home</p>
+                <Link to= "/allusers">
+                <p>User Details </p>
                 </Link>
                 
             </li>
@@ -24,11 +24,12 @@ function Nav() {
                 </Link>
             </li>
             <li className="nav-li">
-                <Link to= "/allusers">
-                <p>User Details </p>
+                <Link to = "/alldepartments">
+                <p>All Departments</p>
+
                 </Link>
-                
             </li>
+            
             
         </ul>
     </div>

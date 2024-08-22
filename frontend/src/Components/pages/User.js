@@ -1,20 +1,35 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function User(props) {
-    const {_id,firstName,lastName,email,Address,Department} = props.users;
+  const {_id, firstName, lastName, email, Address, Department} = props.users;
+  const navigate = useNavigate();
+
+  const deletehandler = async () => {
+    await axios.delete(`http://localhost:5000/users/${_id}`)
+      .then(() => navigate("/"))
+      .then(() => navigate("/allusers"));
+  };
+
   return (
-    <div>
-      <p>User Display</p>
-      <p>ID:{_id}</p>
-      <p>Firstname:{firstName}</p>
-      <p>Lastname:{lastName}</p>
-      <p>Gmail:{email}</p>
-      <p>Address:{Address}</p>
-      <p>Department:{Department}</p>
-
-
-    </div>
+    <tr>
+      <td>{_id}</td>
+      <td>{firstName}</td>
+      <td>{lastName}</td>
+      <td>{email}</td>
+      <td>{Address}</td>
+      <td>{Department}</td>
+      <td>
+        <Link to={`/allusers/${_id}`}>
+          <button className="btn btn-success" >Update</button>
+        </Link>
+        <button  class="btn btn-danger" onClick={deletehandler}>Delete</button>
+      </td>
+    </tr>
   )
 }
 
-export default User
+export default User;

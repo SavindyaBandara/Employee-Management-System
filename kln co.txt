@@ -1,0 +1,104 @@
+import React, { useEffect, useRef, useState } from 'react';
+import Nav from './Nav';
+import axios from "axios";
+import User from "../pages/User";
+import {useReactToPrint} from "react-to-print";
+const URL = "http://localhost:5000/users";
+
+const fetchHandler = async() => {
+    return await axios.get(URL).then((res)=>res.data);
+
+}
+function AllUsers() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+      fetchHandler().then((data) => setUsers(data.users));
+  }, []);
+
+  const ComponentsRef = useRef();
+  const handlePrint = useReactToPrint({
+    content:()=> ComponentsRef.current,
+    DocumentTitle:"User Report",
+    onafterprint:()=>alert("User Report Downloded Succesfully.")
+  });
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [noResult , setNoResult] = useState(false);
+
+  const handleSearch = () => {
+    fetchHandler().then((data) =>{
+      const filteredUsers = data.users.filter((user)=>
+        Object.values(user).some((filed) =>
+      filed.toString().toLowerCase().includes(searchQuery.toLowerCase())
+    ))
+    setUsers(filteredUsers);
+    setNoResult(filteredUsers.length === 0);
+    });
+  }
+  return (
+    <div>
+        <Nav/>
+        
+        <h1>All user details</h1>
+        <input onChange={(e) => setSearchQuery(e.target.value)} type='text' name='Search' placeholder='Search users'>
+         </input>
+         <button onClick={handleSearch}>Search</button>
+         {noResult ? (
+          <div>No User Found</div>
+
+         ):(
+         <div ref={ComponentsRef}>
+          {users && users.map((user, i)=>(
+              <div key={i}>
+                  <User users={user}/>
+            </div>
+            
+          ))}
+        </div>
+      )}
+      <button onClick={handlePrint}>Download Report</button>
+    </div>
+  )
+}
+
+export default AllUsers
+
+
+import React from 'react'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+
+function User(props) {
+    const {_id,firstName,lastName,email,Address,Department} = props.users;
+
+    const navigate = useNavigate();
+
+    const deletehandler = async ()=>{
+      await axios.delete(`http://localhost:5000/users/${_id}`).then((res)=>res.data)
+      .then(()=>navigate("/"))
+      .then(()=>navigate("/allusers"))
+
+    }
+  return (
+    <div>
+      <p>ID:{_id}</p>
+      <p>Firstname:{firstName}</p>
+      <p>Lastname:{lastName}</p>
+      <p>Gmail:{email}</p>
+      <p>Address:{Address}</p>
+      <p>Department:{Department}</p>
+      <Link to ={`/allusers/${_id}`}>
+      <button>Update</button>
+      </Link>
+      <button onClick={deletehandler}>Delete</button>
+<br/>
+<br/>
+
+    </div>
+  )
+}
+
+export default User

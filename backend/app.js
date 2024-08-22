@@ -2,17 +2,20 @@
 
 const express = require("express");
 const mongoose = require("mongoose");
+const userrouter = require("./routes/userRoutes");
+const deprouter = require("./routes/departRoutes");
 
-
-const router = require("./routes/userRoutes");
+const cors=require("cors");
 const app = express();
 
-//Middleware
 app.use(express.json());
-const cors=require("cors");
-
-app.use("/users",router);
 app.use(cors());
+app.use("/users",userrouter);
+app.use("/departments",deprouter);
+
+//Middleware
+
+
 
 mongoose.connect("mongodb+srv://admin:D3gXYY9rAt3ynyfD@cluster0.iyih7.mongodb.net/")
 .then(()=>console.log("MongoDB connected Succesfully"))

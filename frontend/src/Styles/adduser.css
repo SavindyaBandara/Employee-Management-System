@@ -1,0 +1,8 @@
+.background-image {
+    background-image: url("../images/mobitel.jpg"); /* Path to the image */
+    background-size: cover; /* Ensures the image covers the whole area */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 100vh; /* Full viewport height */
+    width: 100%; /* Full width */
+}
